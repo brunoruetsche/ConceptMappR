@@ -1,0 +1,681 @@
+{
+    "app": {
+        "title": "ConceptMappR",
+        "institution": "ETH Zurich",
+        "href": "https://www.ethz.ch"
+    },
+    "tabWelcome": {
+        "name": "Welcome",
+        "title": "<h2>Welcome to ConceptMappR!</h2>",
+        "text": "<div class='col-sm-6'>
+                    <p>
+                        <strong>ConceptMappR</strong> is a Shiny dashboard designed to help students and teachers draw, analyze, and compare concept maps.
+                        The development of ConceptMappR was funded by <a href='https://ethz.ch/en/the-eth-zurich/education/innovedum.html'>Innovedum</a> to advance education at <a href='https://ethz.ch/'>ETH Zurich</a>.
+                    </p> 
+                    <p>
+                        <strong>If you are here for the first time</strong>, please have a look at the information provided under
+                        <a id='linkToTabReadme' href='#' class='action-button'>Readme.</a>
+                        Otherwise you can directly continue to 
+                        <a id='linkToTabDraw1' href='#' class='action-button'>Draw</a>
+                        to draw your own concept map or to
+                        <a id='linkToTabAnalyze1' href='#' class='action-button'>Analyze</a>
+                        if you already have a concept map prepared for analysis (<strong>example files</strong>: <a href='primary.csv'>Primary</a> / <a href='comparison.csv'>Comparison</a>). 
+                    </p>
+                    <p>
+                        As a student, please contact your teacher for questions about the content of the maps. 
+                        If you experience any technical issues or if you have any questions about network analysis in general, please contact <a href='mailto:christian.thurn@ifv.gess.ethz.ch'>Christian Thurn.</a>
+                    </p>
+                    <p>
+                        Thank you for using ConceptMappR!
+                    </p>
+                    <br>
+                    <p style='border-width:3px; border-style:solid; border-color:#97c2fc; padding: 1em;'>
+                        If you want to provide <strong>feedback</strong> to this tool and help evaluating and improving it, you can answer <a href='https://descil.eu.qualtrics.com/jfe/form/SV_9mdffkNG4bztUTI' target='_blank'>this survey</a>.
+                    </p>
+                </div>
+                <div class='col-sm-6' style='height:600px; display:flex; justify-content: center; align-items: center'>
+                    <video style='width: 100%; max-width: 800px; max-height: 600px; height: auto;' poster='welcome.png' controls>
+                        <source src='ConceptMappR.mp4' type='video/mp4'>
+                        Your browser does not support the video tag.
+                    </video>
+                </div>"
+    },
+    "tabReadme": {
+        "name": "Readme",
+        "title": "<h2>Readme</h2>",
+        "expandButton": "Expand All",
+        "collapseButton": "Collapse All",
+        "box1": {
+            "title": "What is this dashboard for?",
+            "text": "<p>
+                        This dashboard allows students and teachers to visualize, analyze, and compare concept maps. 
+                        The overall goal is to improve learning by providing a clear and informative display of concept maps. 
+                        Using network analyses, the tool helps to effectively evaluate concept maps in a few simple steps.
+                    </p>"
+        },
+        "box2": {
+            "title": "Who is this dashboard for?",
+            "text": "<p>
+                        On the one hand, ConceptMappR is intended for <strong>students</strong> to facilitate constructive learning processes by analyzing their own concept maps and comparing them to other maps.
+                        To ensure flexibility, this 'comparison map' can be any concept map: It can be a map a student created at an earlier stage (e.g., before a learning unit), a map of a colleague on the same subject or a curated 'expert map' provided by a teacher.
+                    </p>
+                    <p>
+                        One the other hand, ConceptMappR is intended for <strong>teachers</strong>. 
+                        The dashboard allows to upload multiple maps (e.g., a set of maps created by a class) to create an aggregated map, highlighting unique, shared, and critical nodes and providing a way to investigate how the network structure of a class might look like.
+                    </p>"
+        },
+        "box3": {
+            "title": "Concept Maps, Networks, Nodes & Edges",
+            "text": "<p>
+                        <strong>Concept maps</strong> are a method of visually organizing knowledge to stimulate deep, constructive learning processes on the one hand, and to capture learners' knowledge and misconceptions on the other: 
+                        They can thus be both a support method and a formative assessment method.     
+                    </p>
+                    <p>
+                        Concept maps visualize concepts and their relationships as a <strong>network</strong> of <strong>nodes</strong> (also 'vertices') connected by <strong>edges</strong> (also 'lines' or 'arrows').
+                        The difference to mind maps is that all relationships must be justified and multiple central nodes may exist.
+                    </p>
+                    <p>
+                        For illustration, the following figure shows an articial concept map with nodes 'NodeA', 'NodeB' and 'NodeC' connected by the edges 'Edge1', 'Edge2' and 'Edge3': 
+                    </p>
+                    <center><img id ='imageFile1' src='fileformat1.png' style='width: 50%; max-width: 200px; height: auto'></center>
+                    <br>
+                    <p>
+                        Using concept maps is challenging for teachers due to difficulties in interpretation and costly analysis. 
+                        Current analysis methods involve heuristics and subjective impressions, making it challenging and non-scalable, particularly in large classes. 
+                        As concept maps represent networks, this dashboard assists learners and teachers in evaluating concept maps, using network analysis methods for a more objective assessment.
+                    </p>"
+        },
+        "box4": {
+            "title": "Import (Upload)",
+            "text": "<p>
+                        If you draw your concept map with ConceptMappR, you do not have to worry about file formats, since the exported file can be analyzed without any adjustment (see <a href='#box6'>Draw</a>). 
+                    </p>
+                     <p>
+                        However, if you create your map any other way, these are the <strong>file formats</strong> that are currently supported:
+                    </p>
+                    <ul>
+                    <li><strong>Text files</strong> with file extensions <strong>*.csv, *.tsv*</strong>, and <strong>*.txt</strong> with columns separated by semicolon (;), comma (,) or tabulator (example files: <a href='primary.csv'>Primary</a> / <a href='comparison.csv'>Comparison</a>).</li>
+                    <li><strong>Microsoft Excel files</strong> with file extension <strong>*.xlsx.</strong></li>
+                    <li><strong><a href='https://cmap.ihmc.us/' target='_blank'>CmapTools</a> files</strong> with file extension <strong>*.cxl.</strong></li>
+                    </ul>
+                    <p>
+                        The basic structure of the text and Excel files is a so-called edge list.
+                        Importantly, they must contain exactly <strong>three to four columns</strong> and have <strong>no header</strong> (i.e., no column names).
+                        Let us illustrate the file structure with the following artificial map:
+                    </p>
+                    <center><img id ='imageFile1' src='fileformat1.png' style='width: 50%; max-width: 200px; height: auto'></center>
+                    <br>
+                    <ul>
+                    <li>The <strong>first</strong> column contains the names of the <strong>'source' nodes</strong> (i.e., 'NodeA', 'NodeB', 'NodeC').</li>
+                    <li>The <strong>second</strong> column contains the <strong>labels of the edges</strong> connecting the nodes mentioned in the first and third columns (i.e., 'Edge1', 'Edge2', 'Edge3'). 
+                        The edge label can also be an empty string.</li>
+                    <li>The <strong>third</strong> column contains the names of the <strong>'target' nodes</strong> (i.e., 'NodeB', 'NodeC', 'NodeA')</li>
+                    <li>The <strong>fourth</strong> column is optional. 
+                        It can be used to specify the direction of the edges. 
+                        When the value is <strong>'0'</strong> (or when no text or no fourth column is provided), the edge is drawn without arrowheads.
+                        When the value is <strong>'1'</strong>, an arrow from the source to the target node is drawn. 
+                        When the value is <strong>'2'</strong>, a bidirectional arrow is drawn.</li>
+                    </ul>
+                    <p>
+                        Thus, the above concept map would look like this in tabular format (example files: <a href='map.csv'>*.csv</a> / <a href='map.xlsx'>*.xlsx</a>):
+                    </p>
+                    <center><img id ='imageFile2' src='fileformat2.png' style='width: 60%; max-width: 250px; height: auto'></center>
+                    <br>"
+        },
+        "box5": {
+            "title": "Export (Download)",
+            "text": "<p>
+                         You can export (download) your drawing and the information displayed in the dashboard.
+                         You have the option to choose between different <strong>Output File/s</strong>:
+                     </p>
+                     <ul>
+                        <li>
+                        	<strong>Map Structure (*.cxl)</strong>: 
+                        	This file represents your drawing / map including formatting and node positions using the format specified by <a href='https://cmap.ihmc.us/' target='_blank'>CmapTools</a>. 
+                        	It is most suited to export your drawing or if you want to further customize your map in CmapTools.
+                        </li>
+                        <li>
+                        	<strong>Edge List (*.xlsx)</strong>: 
+                        	This file represents your drawing / map as an edge list (see <a href='#box4'>Import (Upload)</a> for an explanation). 
+                        	Thus, it does not include node positions or formatting.
+                        </li>
+                        <li>
+                        	<strong>Analysis (*.xlsx)</strong>: 
+                        	This file is only available under 'Analyze'. 
+                        	It contains a summary of the analysis and information displayed in the dashboard.
+                        </li>                        
+                        <li>
+                        	<strong>Pixel Graphic (*.png) / Vector Graphic (*.svg)</strong>: 
+                        	These options export the displayed maps as images. 
+                        	The vector graphic (*.svg) can be further edited in a compatible software.
+                        	Please note that exported images will look slightly different to the interactive maps shown in the dashboard.
+                        </li>      
+                     </ul>
+                     <p>
+                         You can either select a single or multiple output files. 
+                         Click on <strong>'Download'</strong> to save the file.
+                         If you have selected multiple files, a *.zip file is returned. 
+                     </p>
+                	"
+        },       
+        "box6": {
+            "title": "Draw",
+            "text": "<p>
+                        One major obstacle in analyzing concept maps in teaching, especially in larger classrooms, is the lack of a seamless integration between drawing and analyzing.
+                        ConceptMappR includes <strong>basic drawing functionality</strong> directly in the dashboard under <a id='linkToTabDraw2' href='#' class='action-button'>Draw</a> (but see below for dedicated drawing software).
+                        This is how it works:
+                    </p>
+                    <ul>
+                        <li>Click on <strong>'Add Node'</strong> and on an empty space to create a new node.</li>
+                        <li>Click on <strong>'Add Edge'</strong> and draw a line from one node to another to create a new edge.</li>                        
+                        <li>Select a node and click on <strong>'Edit Node'</strong> to edit the <strong>label</strong>, <strong>size</strong> or <strong>color</strong> of a node.</li>
+                        <li>Select an edge and click on <strong>'Edit Edge'</strong> to add / edit the <strong>label</strong>, <strong>arrowheads</strong> (<i>'0'</i> for no arrowheads, <i>'1'</i> for arrows from source to the target node , <i>'2'</i> for bidirectional arrows), <strong>width</strong> and <strong>color</strong> of an edge.</li>
+                        <li>Select a node or an edge and click on <strong>'Delete selected'</strong> to remove it.</li>
+                		<li><strong>Shortcuts</strong>: <i>'N'</i> to add nodes, <i>'E'</i> to add edges, <i>'double click'</i> on nodes / edges to edit, <i>'D'</i> to remove the selected nodes / edges</li>
+                        <li>We highly recommend using a device with a larger screen, mouse and keyboard. When <strong>drawing on a mobile phone</strong> or smaller screen, you can click on the 
+                            <i class='fa fa-bars' aria-hidden='true'></i>
+                            button to make the canvas bigger.
+                        </li>
+                    </ul>
+                    <center>
+                        <video width='40%' height='auto' controls>
+                        <source src='drawing.mp4' type='video/mp4'>
+                        Your browser does not support the video tag.
+                        </video>
+                    </center>
+                    <p>
+                        <br>
+                        The dashboard also provides two options to help you <strong>setting up your drawing</strong>. 
+                        First, you can <strong>upload a list of nodes</strong> (example files: <a href='nodes.csv'>*.csv</a> / <a href='nodes.xlsx'>*.xlsx</a>) which will populate the canvas with nodes allowing you to focus on drawing the connections. 
+                        Second, you can also <strong>upload an existing concept map</strong> (see <a href='#box4'>Import (Upload)</a>) which you then can edit.
+                        Importantly, you can <strong>download</strong> your map</strong> by selecting the <strong>Output File/s</strong> and clicking on <strong>'Download'</strong> (see <a href='#box5'>Export (Download)</a>).
+                    </p>
+                    <p>
+                        There are two options to <strong>analyze your drawing</strong>: 
+                        In the 'Analyze' tab, you can either upload the exported Map Structure (*.cxl) or Edge List (*.xlsx).
+                        Alternatively, you can directly retrieve the current drawing without the intermediate export step (see 'Analyze: General' in the Readme).</strong>
+                    </p>
+                    <p>
+                        Another option to draw concept maps is to use a <strong>dedicated software</strong> such as <a href='https://cmap.ihmc.us/' target='_blank'>CmapTools</a>. 
+                        CmapTools is freely available, runs on most major platforms, and even provides a <a href='https://cmapcloud.ihmc.us/' target='_blank'>cloud-based version</a> that can be used without installation. 
+                        However, please be aware that the cloud-based version will store your data on their servers.
+                        To keep the hurdles as small as possible, you can export your Cmaptools map as a *.cxl file which can then directly be imported into ConceptMappR.
+                    </p>
+                    <p>
+                        Still, sometimes nothing beats <strong>drawing on paper or using the software you know</strong>.
+                        In these cases, you can still use ConceptMappR if you are willing to translate the map into the formats outlined in the box 'Import (Upload)' or to redraw your map with ConceptMappR. 
+                    </p>
+                    "
+        },
+        "box7": {
+            "title": "Analyze: General",
+            "text": "<p>
+                        The first step under <a id='linkToTabAnalyze2' href='#' class='action-button'>Analyze</a> is to provide the data (example files: <a href='primary.csv'>Primary</a> / <a href='comparison.csv'>Comparison</a>). 
+                        In the <strong>sidebar on the left</strong>, you can select <strong>Source of the Primary Map</strong>, i.e. whether you want to <strong>upload a single or multiple file(s)</strong> as the Primary Map (see <a href='#box4'>Import (Upload)</a>) or if you want want to <strong>use the current drawing</strong> (see <a href='#box6'>Draw</a>).
+                        When uploading Primary Files, you can click on 'Select file...' to open the file selection dialogue allowing you to select a single or multiple files (hold Shift or Ctrl to select more than one file).
+                        Optionally, you can also <strong>upload a single Comparison File</strong> to which the Primary File(s) are then compared to.
+                        Once you click on <strong>'Analyze'</strong>, the dashboard will perform the analysis and restructure depending on whether a single Primary File, multiple Primary Files, and a Comparison File was uploaded.
+                    </p>
+                    <center><img id ='imageFileupload' src='fileupload.png' style='width: 80%; max-width: 150px; height: auto'></center>
+                    <br>
+                    <p>
+                        The <strong>sidebar on the left</strong> now shows several options to customize the display and the analysis. 
+                        More information about these options is provided below (see <a href='#box8'>Analysis: Centrality</a> and <a href='#box9'>Analysis: Matching Options</a>) as well as in the tooltips appearing when moving your mouse cursor over each option.
+                        You can return to the screen where you can upload your data by clicking on <strong>'Change'</strong>.
+                        You can <strong>download</strong> the information displayed in the dashboard by selecting the <strong>Output File/s</strong> and clicking on <strong>'Download'</strong> (see <a href='#box5'>Export (Download)</a>).</p>
+                    <center>
+                        <!-- Small image that triggers the modal -->
+                        <img id='imageGUI' src='gui.png' style='width: 100%; max-width: 700px; height: auto; cursor: pointer;' onclick=\"$('#imageModal').modal('show');\">
+
+                        <!-- Modal for the larger image -->
+                        <div id='imageModal' class='modal fade' tabindex='-1' role='dialog'>
+                            <div class='modal-dialog modal-xl' role='document' style='width: 80%'>
+                                <div class='modal-content'>
+                                    <div class='modal-header'>
+                                        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class='modal-body'>
+                                        <img src='gui.png' style='width: 100%;'>
+                                    </div>
+                                </div>
+                           </div>
+                       </div>
+                    </center>
+                    <br>
+                    <p>
+                        The <strong>main area on the right</strong> now shows several <strong>colored boxes</strong>.
+                        These will include information about the number of nodes, isolates (unconnected nodes), edge, and the density of the network.
+                        In each box, the values of the Primary File(s) are shown on the left and the values of the Comparison file (if available) on the right. 
+                        More information will appear when moving your mouse cursor over each box.
+                    </p>
+                    <p>
+                       The <strong>main area on the right</strong> also shows up to two <strong>interactive plots</strong> of your concept maps.
+                       In these plots, you can move and select nodes and edges as well as zoom in and out.
+                       The size of the nodes corresponds to the centrality measure you have selected (see <a href='#box8'>Analysis: Centrality</a>) and 
+                       the thickness of the edges corresponds to the number of files containing each edge.
+                       Nodes that are unique to the Primary File(s), i.e. that do not appear in the Comparison File (and vice versa), are displayed as orange squares. 
+                       Similarly, unique edges are displayed as orange, dashed lines.
+                    </p>
+                    <p>
+                        The <strong>main area on the right</strong> shows one or several <strong>interactive tables</strong>.
+                        In these tables, you can sort and filter the data as required.
+                        The <strong>'Centrality' table</strong> shows the centrality of each node and if available, the (absolute) difference between the Primary File(s) and the Comparison File.
+                        The <strong>'Analysis by File' table</strong> shows for each Primary File how many nodes and edges are shared with the Comparison File.
+                        The <strong>'Analysis by Nodes' table </strong> and <strong>'Analysis by Edges' table</strong> show for each node or edge how often they appear across all Primary Files.
+                        More information about each column will appear when moving your mouse cursor over the column names.
+                    </p>"
+        },
+        "box8": {
+            "title": "Analysis: Centrality",
+            "text": "<p>
+                        Centrality measures are used to identify critical or important nodes in a network but they differ in how this 'importance' is calculated:
+                    </p>
+                    <ul>
+                        <li><strong>Degree Centrality:</strong> This calculates the number of adjacent edges of each node.</li>
+                        <li><strong>Betweenness Centrality: </strong>This calculates the shortest paths between all pairs of nodes in your map, i.e. the minimum number of steps one has to take to connect one node to another, and indicates how many of these shortest paths pass through each node. 
+                             It can be seen seen as a measure of dependence of a network on a given node.</li>
+                        <li><strong>Closeness Centrality: </strong>This is the inverse of the sum of all shortest paths between each node and all other nodes in your map. 
+                             It can be seen as a measure of node efficiency, i.e. how 'quickly' you reach all other nodes.</li>
+                    </ul>"
+        },
+        "box9": {
+            "title": "Analysis: Matching Options",
+            "text": "<p>These options allow you to decide how the Primary File(s) is/are matched to the Comparison File.
+                        Note that the values in the Primary File(s) are replaced with the matching values of the Comparison File.
+                        The values in the Comparison File are seen as the 'reference' and thus are never changed. 
+                        When uploading multiple Primary Files, they are matched individually to the Comparison File; they are never matched to each other.</p>
+                     <p>These are the available options:</p>
+                    <ul>
+                        <li>
+                            <p>
+                                <strong>'Exact'</strong>: Nodes and edges are matched only if they are identical (e.g., 'DNS' in the Primary File is matched to 'DNS' in the Comparison File but not to 'DNA').
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <strong>'Case Insensitive'</strong>: Nodes and edges are matched even if they differ in case (e.g., 'protein' is matched to 'Protein')
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <strong>'Approximate'</strong>: Decide how 'close' nodes and edges are allowed to be to still be matched.
+                            </p> 
+                            <p>
+                                This option uses the Levenshtein distance to count the number of deletions, insertions, and substitutions that are necessary to turn the values from the Primary File(s) into the values of the Comparison File.
+                            </p>
+                            <p>
+                                The suboption <strong>'Matching By'</strong> allows you to select whether to only match the nodes or to match nodes AND edges.
+                            </p>
+                            <p>
+                                The suboption <strong>'Max. Distance'</strong> allows setting the maximally allowed distance.
+                                For example, if the distance is set 1, 'DNA' and 'DNS' will be matched, since the former can be changed into the latter by substituting the letter 'A' with a 'S'.
+                            </p>
+                        </li>
+                    </ul>"
+        },
+        "box10": {
+            "title": "Analyses: Selecting Nodes / Edges",
+            "text": "<p>
+                      When <strong> multiple Primary Files</strong>  are uploaded, a <strong>slider</strong> to select nodes and edges is displayed in the sidebar on the left.
+                      The slider allows restricting the analysis to nodes and edges based on the number of Primary Files they appear in.
+                    </p>
+                    <p>
+                      <strong>For example</strong>, when uploading 6 Primary Files and selecting a range from 2 to 6, nodes and edges appearing only once across all files are removed, while nodes appearing at least twice are retained.
+                    </p>
+                     <center><img id ='sliderSelectEdges' src='sliderSelectEdges.png' style='width: 50%; max-width: 200px; height: auto'></center>
+                    <br>
+                    <p>
+                    After first initialization, the <strong>default range</strong> of the slider is set to show the average number of edges across files (i.e., total number of edges / number of uploaded files).
+                    </p>
+                    <p>
+                      This option <strong> affects all further analyses</strong> since the unselected nodes / edges are removed completely beforehand (e.g., it affects the number of nodes, number of edges and centrality values).
+                    </p>"
+        },
+        "box11": {
+            "title": "Data Storage",
+            "text": "<p>
+                        ConceptMappR temporarily saves the uploaded concept map(s) for visualization and analysis purposes only, ensuring that no data is stored long-term, and all information is automatically deleted as soon as the session is closed.
+                    </p>"
+        },
+        "box12": {
+            "title": "Help",
+            "text": "<p>
+                        There are several ways to receive help:
+                    </p>
+                    <p>
+                        First, please refer back to this page if you are unsure about the usage of the dashboard or the interpretation of the analyses.
+                    </p>
+                    <p>
+                        Second, we have placed several helpful tooltips throughout the dashboard. 
+                        If you hover over a box, button or text, the answer you are looking for might immediately be shown.
+                    </p>
+                    <p>
+                        Third, as a student, please contact your teacher for questions about the content of the maps. 
+                        If you experience any technical issues or if have questions about network analysis in general, please contact <a href='mailto:christian.thurn@ifv.gess.ethz.ch'>Christian Thurn.</a>
+                    </p>"
+                },
+        "box13": {
+            "title": "Acknowledgements",
+            "text": "<p>
+                        ConceptMappR is built using <a href='https://www.r-project.org/'  target='_blank'>R</a> which is a free environment for statistical computing and visualization. 
+                        In addition to base R, ConceptMappR relies among others on the following packages: 
+                        <a href='https://cran.r-project.org/web/packages/conflicted/index.html' target='_blank'>conflicted</a>, 
+                        <a href='https://cran.r-project.org/web/packages/DiagrammeR/index.html' target='_blank'>DiagrammeR</a>, 
+                        <a href='https://cran.r-project.org/web/packages/DiagrammeRsvg/index.html' target='_blank'>DiagrammeRsvg</a>, 
+                        <a href='https://cran.r-project.org/web/packages/dplyr/index.html' target='_blank'>dplyr</a>, 
+                        <a href='https://cran.r-project.org/web/packages/htmltools/index.html' target='_blank'>htmltools</a>, 
+                        <a href='https://cran.r-project.org/web/packages/igraph/index.html' target='_blank'>igraph</a>, 
+                        <a href='https://cran.r-project.org/web/packages/reactable/index.html' target='_blank'>reactable</a>, 
+                        <a href='https://cran.r-project.org/web/packages/readr/index.html' target='_blank'>readr</a>, 
+                        <a href='https://cran.r-project.org/web/packages/readxl/index.html' target='_blank'>readxl</a>, 
+                        <a href='https://cran.r-project.org/web/packages/rjson/index.html' target='_blank'>rjson</a>, 
+                        <a href='https://cran.r-project.org/web/packages/rsvg/index.html' target='_blank'>rsvg</a>, 
+                        <a href='https://cran.r-project.org/web/packages/shiny/index.html' target='_blank'>shiny</a>, 
+                        <a href='https://cran.r-project.org/web/packages/shinyBS/index.html' target='_blank'>shinyBS</a>, 
+                        <a href='https://cran.r-project.org/web/packages/shinydashboard/index.html' target='_blank'>shinydashboard</a>, 
+                        <a href='https://cran.r-project.org/web/packages/shinyjs/index.html' target='_blank'>shinyjs</a>, 
+                        <a href='https://cran.r-project.org/web/packages/shinyWidgets/index.html' target='_blank'>shinyWidgets</a>, 
+                        <a href='https://cran.r-project.org/web/packages/stringdist/index.html' target='_blank'>stringdist</a>, 
+                        <a href='https://cran.r-project.org/web/packages/stringr/index.html' target='_blank'>stringr</a>,
+                        <a href='https://cran.r-project.org/web/packages/tibble/index.html' target='_blank'>tibble</a>, 
+                        <a href='https://cran.r-project.org/web/packages/tidyr/index.html' target='_blank'>tidyr</a>,
+                        <a href='https://cran.r-project.org/web/packages/tippy/index.html' target='_blank'>tippy</a>, 
+                        <a href='https://cran.r-project.org/web/packages/visNetwork/index.html' target='_blank'>visNetwork</a>,
+                        <a href='https://cran.r-project.org/web/packages/writexl/index.html' target='_blank'>writexl</a> and
+                        <a href='https://cran.r-project.org/web/packages/xml2/index.html' target='_blank'>xml2</a>.
+                    </p>
+                    <p>
+                        Many thanks to all the dedicated developers!
+                    </p>"
+        }
+   },
+   "tabDraw": {
+        "name": "Draw",
+        "title": "<h2>Draw</h2>",
+        "info": "<ul>
+                	<li><strong>Please download the drawing regularly</strong> in case of unexpected crashes (e.g., connection dropouts). 
+                	     It is recommended to use the <strong>map structure (i.e. *.cxl file)</strong> which when reuploaded recreates the drawing including the formatting and positions.</li>
+                	<li><strong>Shortcuts</strong>: <i>'N'</i> to add nodes, <i>'E'</i> to add edges, <i>'double click'</i> on nodes / edges to edit, <i>'D'</i> to delete</li>
+                 </ul>"
+    },
+    "tabAnalyze": {
+        "name": "Analyze",
+        "noData": "<h4>No data uploaded</h4>",
+        "primaryMap": "Primary Map",
+        "comparisonMap": "Comparison Map",
+        "sliderCentrality": {
+            "title": "Show Nodes with Size (Centrality)",
+            "tooltip": "Show / hide nodes based on their size (centrality)."
+        },
+        "sliderEdge": {
+            "title": "Show Edges with Thickness",
+            "tooltip": "Show / hide edges based on their thickness (i.e., number of files containing them)."
+        },
+        "nodeSelection": "Select Nodes",
+        "tblCentrality": {
+            "title": "Centrality",
+            "node": "Node",
+            "primary": "Primary",
+            "comparison": "Comparison",
+            "difference": "Difference",
+            "measure": "Measure", 
+            "tooltipPrimary": "Centrality of each node in the Primary File(s) for the selected centrality measure. 
+                               If multiple Primary Files were uploaded, the individual values are averaged.",
+            "tooltipComparison": "Centrality of each node in the Comparison File for the selected centrality measure.",
+            "tooltipDifference": "Absolute difference between the columns 'Primary' and 'Difference'."
+        },
+        "tblFile": {
+            "title": "Analysis by File",
+            "filename": "Filename",
+            "nodes": "Nodes",
+            "isolates": "Isolates",
+            "edges": "Edges",
+            "countNodeShared": "Count Shared",
+            "countNodeUnique": "Count Unique",
+            "countNodeTotal": "Count Node",
+            "percentNodeShared": "Percent Shared",
+            "countIsoShared": "Count Shared",
+            "countIsoUnique": "Count Unique",
+            "countIsoTotal": "Count Isolates",
+            "percentIsoShared": "Percent Shared",
+            "countEdgeShared": "Count Shared",
+            "countEdgeUnique": "Count Unique",
+            "countEdgeTotal": "Count Edge",
+            "percentEdgeShared": "Percent Shared",
+            "tooltipCountNodeShared": "Number of nodes that are shared with the Comparison File.",
+            "tooltipCountNodeUnique": "Number of nodes that are unique to the Primary File(s), i.e. that do not appear in the Comparison File.",
+            "tooltipCountNodTotale": "Number of nodes",
+            "tooltipPercentNodeShared": "Percentage of shared to total number of nodes (i.e., total = shared + unique).",
+            "tooltipCountIsoShared": "Number of isolates (unconnected nodes) that are shared with the Comparison File.",
+            "tooltipCountIsoUnique": "Number of isolates (unconnected nodes) that are unique to the Primary File(s), i.e. that do not appear in the Comparison File.",
+            "tooltipCountIsoTotal": "Number of isolates (unconnected nodes)",
+            "tooltipPercentIsoShared": "Percentage of shared to total number of isolates (i.e., total = shared + unique).",
+            "tooltipCountEdgeShared": "Number of edges that are shared with the Comparison File.",
+            "tooltipCountEdgeUnique": "Number of edges that are unique to the Primary File(s), i.e. that do not appear in the Comparison File.",
+            "tooltipPercentEdgeShared": "Percentage of shared to total number of edges (i.e., total = shared + unique).",
+            "tooltipCountEdgeTotal": "Number of edges"
+       },
+        "tblNode": {
+            "title": "Analysis by Node",
+            "node": "Node",
+            "filename": "Filename",
+            "unique": "Unique",
+            "percent": "Percent",
+            "tooltipUnique": "'Yes' means the node is unique. 'No' means the node is also found in the Comparison File.",
+            "tooltipPercent": "Percentage of uploaded Primary Files containing this node. Unique nodes are highlighted in orange."
+        },
+        "tblEdge": {
+            "title": "Analysis by Edge",
+            "edge": "Edge",
+            "inFiles": "inFiles",
+            "unique": "Unique",
+            "percent": "Percent",
+            "from": "From",
+            "label": "Link", 
+            "to": "To",
+            "arrowheads": "Arrows",
+            "filename": "Filename",
+            "tooltipUnique": "'Yes' means the edge is unique. 'No' means the edge is also found in the Comparison File.",
+            "tooltipPercent": "Percentage of uploaded Primary Files containing this edge. Unique edges are plotted in orange."        },
+        "boxNodes": {
+            "title": "Number of Nodes",
+            "tooltip": "Total number of nodes in your map(s).
+                        If multiple Primary Files were uploaded, the average number of nodes across all Primary Files is shown on the left, and the value of the Comparison File on the right."
+        },
+        "boxIsolates": {
+            "title": "Number of Isolates",
+            "tooltip": "Total number of isolates, i.e. nodes without any connections.
+                        If multiple Primary Files were uploaded, the average number of isolates across all Primary Files is shown on the left, and the value of the Comparison File on the right."
+        },
+        "boxEdges": {
+            "title": "Number of Edges",
+            "tooltip": "Total number of edges in your map(s).
+                        If multiple Primary Files were uploaded, the average number of edges across all Primary Files is shown on the left, and the value of the Comparison File on the right."
+        },
+        "boxDensity": {
+            "title": "Density",
+            "tooltip": "Density of your map(s) which is the number of actual edges divided by the total number of possible edges.
+                        Values are between 0 and 1 (1 reflecting a map in which all nodes are connected to each other).
+                        If multiple Primary Files were uploaded, the average density across all Primary Files is shown on the left, and the value of the Comparison File on the right."
+        }
+    },
+    "sidebar": {
+        "upload": {
+            "title": "Data Upload",
+            "buttonLabel": "Select file...",
+            "placeholder": "No file selected",
+            "popUpNoFileTitle": "No Data",
+            "popUpNoFileMessage": "Please first select one or multiple Primary File(s) and wait until the upload is completed. Uploading a Comparison File is optional.",
+            "popUpNoFileButtonLabel": "Dismiss",
+            "popUpNoDrawingTitle": "No Drawing Available",
+            "popUpNoDrawingMessage": "Please switch to the 'Draw' tab once to initialize the drawing. Uploading a Comparison File is optional.",
+            "popUpNoDrawingButtonLabel": "Dismiss",
+            "popUpReadErrorTitle": "Error",
+            "popUpReadErrorMessage": "There was a problem reading the file: ",
+            "popUpReadErrorButtonLabel": "Dismiss",
+          	"fileDraw": {
+                "title": "File (Optional)",
+                "tooltip": "Upload a file containing a map structure (*.cxl), edge list or node list. See the Readme for more information."
+            },
+            "filePrimary": {
+                "title": "Primary File(s) (Required)",
+                "tooltip": "Upload a single or multiple Primary File(s) (hold Shift or Ctrl to select more than one file).
+                            If you upload multiple files, the files will be aggregated and additional analyses highlighting the differences between the files will be displayed."
+            },
+            "fileComparison": {
+                "title": "Comparison File (Optional)",
+                "tooltip": "Upload a single Comparison File. 
+                            Uploading a Comparison File is optional.
+                            If a file is uploaded, the map of the Primary File(s) will be shown on the left, and the map of the Comparison File on the right.
+                            Unique nodes, i.e. nodes that do not appear in the other map, will be displayed as orange squares and unique edges as orange, dashed lines."
+            },
+            "analyzeFiles": {
+                "title": "Analyze...",
+                "tooltip": "Click here to analyze the uploaded files.
+                            If you later want to change the files, click on 'Change Data'"
+            }
+        },
+        "sourcePrimary": {
+                "title": "Source of Primary Map",
+                "tooltip": "Select 'File' to upload a single or multiple file(s) or 'Drawing' to retrieve the current map from the 'Draw' tab to use as the Primary Map.",
+                "file": "File(s)",
+                "drawing": "Drawing"
+       },
+        "displayOptions": {
+            "title": "Display Options",
+            "centrality": {
+                "title": "Select Centrality Measure",
+                "tooltip": "Select the centrality measure. 
+                            The selection will affect the node size in the map(s) and the values displayed in the 'Centrality' table. 
+                            See the Readme for more details.",
+                "degree": "Degree",
+                "betweenness": "Betweenness",
+                "closeness": "Closeness"
+            },
+            "checkEdgeLabels": {
+                "title": "Consider Edge Labels",
+                "tooltip": "Choose whether to treat edges with different labels as distinct connections. 
+                			If 'no', edges between the same nodes will be combined. 
+                			This affects edge thickness and the 'Analysis by Edge' table.",
+                "yes": "Yes",
+                "no": "No"
+            },
+            "checkEdgeDirection": {
+                "title": "Consider Edge Direction",
+                "tooltip": "Choose whether to analyze edges based on their direction (arrows). 
+                			If 'no', connections between the same nodes will be combined, regardless of direction (e.g., 'A --> B' is assumed to be the same as 'A <-> B'). 
+                			This affects edge thickness and the 'Analysis by Edge' table.",
+                "yes": "Yes",
+                "no": "No"
+            },
+            "layout": {
+                "title": "Map Layout",
+                "tooltip": "Select different layouts for the map(s).",
+                "forceAtlas2Based": "Physics (visNetwork)",
+                "layout_nicely": "Nicely (igraph)",
+                "layout_in_circle": "Circle (igraph)",
+                "manual": "Manual"
+            },
+            "randomSeed": {
+                "title": "Random Seed",
+                "tooltip": "Choose a seed to influence the node positions. Different seeds will result in different arrangements of the nodes. Use a specific number to recreate a layout you like."
+            },
+            "sliderSelectEdges": {
+                "title": "Select Nodes and Edges",
+                "tooltip": "Filter nodes and edges based on the number of Primary Files they're associated with. 
+                			See the Readme for more details."
+            }
+        },
+        "matchingOptions": {
+            "title": "Matching Options",
+            "matchingType": {
+                "title": "Matching Type",
+                "tooltip": "Select how the Primary File(s) is/are matched to the Comparison File. 
+                            See the Readme for more details.",
+                "exact": "Exact",
+                "caseInsensitive": "Case Insensitive",
+                "approximate": "Approximate"
+            },
+            "nodesOrEdges": {
+                "title": "Matching By",
+                "tooltip": "Choose whether to match nodes only, or both nodes and edges across the Primary File(s) and Comparison File.
+                            See the Readme for more details.",
+                "nodes": "Nodes",
+                "edges": "Nodes & Edges"
+            },
+            "matchDistance": {
+                "title": "Max. Distance",
+                "tooltip": "The maximum allowed difference between values in the Primary File(s) and Comparison File for them to be considered a match. 
+                            See the Readme for more details."
+            }
+        },
+        "changeData": {
+            "title": "Change Data",
+            "buttonLabel": "Change",
+            "tooltip": "Return to the screen where you can change your data."
+        },
+        "resetDrawing": {
+            "title": "Reset Drawing",
+            "buttonLabel": "Reset",
+            "tooltip": "Reset the drawing. Please note that your current drawing will be deleted.",
+            "popUpTitle": "Warning",
+            "popUpMessage": "Your current drawing will be deleted. Do you want to continue?",
+            "popUpButtonLabelCancel": "Cancel",
+            "popUpButtonLabelDelete": "Delete"
+       }
+    },
+    "download": {
+      "title": "Download",
+      "list": {
+        "title": "Output File(s)",
+        "cxl": "Map Structure (*.cxl)",
+        "xlsxEdgeList": "Edge list (*.xlsx)",
+        "xlsxAnalyses": "Analyses (*.xlsx)",
+        "png": "Pixel graphic (*.png)",
+        "svg": "Vector graphic (*.svg)",
+        "tooltip": "Select the output file(s).
+        	            If multiple files are selected, a *.zip will be returned.
+        	            See the Readme for more details."
+      },
+      "button": {
+        "buttonLabel": "Download",
+        "tooltip": "Download the selected output file(s)."
+      },
+      "files": {
+        "filename": "Filename",
+        "filenameXlsxEdgeList": "edgelist.xlsx",
+        "filenameXlsxEdgeListPrimary": "edgelist-primary.xlsx",
+        "filenameXlsxEdgeListComparison": "edgelist-comparison.xlsx",
+        "filenameCxl": "map.cxl",
+        "filenameCxlPrimary": "map-primary.cxl",
+        "filenameCxlComparison": "map-comparison.cxl",
+        "filenamePng": "graphic.png",
+        "filenamePngPrimary": "graphic-primary.png",
+        "filenamePngComparison": "graphic-comparison.png",
+        "filenameSvg": "graphic.svg",
+        "filenameSvgPrimary": "graphic-primary.svg",
+        "filenameSvgComparison": "graphic-comparison.svg",
+        "filenameXlsxAnalyses": "analyses.xlsx",
+        "sheetPrimary": "Primary Data",
+        "sheetComparison": "Comparison Data",
+        "sheetBoxValues": "Box Values",
+        "sheetCentrality": "Centrality",
+        "sheetFiles": "Files",
+        "sheetNodes": "Nodes",
+        "sheetEdges": "Edges"
+      }
+    },
+	"footer": {
+      "text": "<p>
+                Project Team: 
+                <a href='https://ethz.ch/de/utils/search.MjE4NTQx.html'>Christian Thurn</a> (ETH Zurich),
+                <a href='https://ifvll.ethz.ch/en/about-us/people/person-detail.MTg4NzA4.TGlzdC81NjMsOTk1OTk2MTQ0.html'>Simona Daguati</a> (ETH Zurich),
+                <a href='https://www.phsz.ch/person/bruno-ruetsche'>Bruno Rütsche</a> (PH Schwyz), 
+                <br>
+                Development: <a href='https://www.phsz.ch/person/bruno-ruetsche'>Bruno Rütsche (PH Schwyz)</a>, Funding: <a href='https://ethz.ch/en/the-eth-zurich/education/innovedum.html' target='_blank'>Innovedum (ETH Zurich)</a>
+                </p>
+              "
+  }
+}
